@@ -13,7 +13,7 @@ app.get('sum', function (request, response){
 
 app.get('readfile', function (request, response){
         let file = request.url.split("/");
-        readFile(file[2], function(errr) {
+        readFile(file[2], function(errr,data) {
 
             if (errr) {
                 console.log("err",errr)
@@ -25,9 +25,9 @@ app.get('readfile', function (request, response){
             }
             console.log("readfile successfully   ");
         });
-        let result = "created file successfully";
-        response.writeHead(200);
-        response.write(result);
+        
+        
+        response.write(data);
         response.end();
 });
 
