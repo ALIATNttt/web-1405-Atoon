@@ -1,6 +1,9 @@
+
+
 import { createServer } from "http";
 //import { writeFile  } from "node:fs";
 import { readFile  } from "node:fs";
+
 let controller = [
     {
         name: "/sum",
@@ -17,20 +20,25 @@ let controller = [
         name: "/readFile",
         func: function (request, response) {
             let file = request.url.split("/");
-            readFile(file[2],function(error,data) {
+
+            readFile(file[2], function(error, data) {
+
                 if (error) {
-                    let error = "readfile fail";
+                    let errorMessage = "readfile fail";
+
                     response.writeHead(400);
-                    response.write(error);
+                    response.write(errorMessage);
                     response.end();
-                    
+
+                    return;
                 }
-                else{
+                else {
                     console.log("readfile successfully");
+                    response.writeHead(200);
                     response.write(data);
                     response.end();
                 }
-                
+
             });
             
         }
